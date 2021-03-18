@@ -1,7 +1,7 @@
 body {
     max-width: 1280px;
     margin: auto;
-    font-family:"open sans" "sansarif";
+    font-family:"open sans" "sans-serif";
 }
 header {
     text-align: center;
@@ -63,4 +63,9 @@ footer {
 
 .mr3 {
     margin:0.3em;
+}
+@media screen ans (max-width: 900px){
+    main {
+        max-width:90%; 
+    }
 }
