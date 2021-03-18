@@ -16,7 +16,7 @@ header p {
 .white,
 .white a:link,
 .white a:visited{
-    color: white
+    color: white;
 }
 header nav img {
     border-radius: 50%; 
@@ -60,3 +60,4 @@ footer .next {
 footer {
     padding: 1em 0 3em 0;
 }
+
