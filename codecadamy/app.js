@@ -1,1 +1,1 @@
-console.log(`Hello`+` `+`World`)
+console.log('Teaching the world how to code'.length); 
