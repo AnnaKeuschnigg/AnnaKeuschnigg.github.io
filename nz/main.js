@@ -37,6 +37,10 @@ for(let entry of ROUTE) {  //console.log(entry);
     if (entry.nr==17) {
         map.setView([entry.lat, entry.lng], 13),
         mrk.openPopup();}}
+    
+nav.onchange= (evt) =>{
+    	console.log(evt);
+};
 
 
 //console.log(document.querySelector("#map"))
