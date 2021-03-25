@@ -6,7 +6,7 @@ let stop = {
     lat: -41.8245,
     lng:  172.8381,
     user: "AnnaKeuschnigg",
-    Wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)",
+    wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)",
 };
 
 
@@ -17,5 +17,5 @@ const map= L.map("map",{center:[stop.lat,stop.lng],
     ]}
 );
 let mrk= L.marker([stop.lat,stop.lng]).addTo(map);
-mrk.bindPopup("Lake Rotoiti(Tasman)").openPopup();
+mrk.bindPopup("Lake Rotoiti (Tasman)").openPopup();
 //console.log(document.querySelector("#map"))
