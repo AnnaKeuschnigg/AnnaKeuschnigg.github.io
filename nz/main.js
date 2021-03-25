@@ -39,7 +39,11 @@ for(let entry of ROUTE) {  //console.log(entry);
         mrk.openPopup();}}
     
 nav.onchange= (evt) =>{
-    	console.log(evt);
+    let selected= evt.target.selected.Index;
+    let options= evt.target.options;
+    let value=options[selected].value;
+    let link= `https://${value}.github.io/nz/index.html`;
+    console.log(value, link);
 };
 
 
