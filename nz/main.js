@@ -10,20 +10,23 @@ let stop = {
 };
 
 
-const map= L.map("map",{center:[stop.lat,stop.lng],
-    zoom: 12,
+const map= L.map("map",{//center:[stop.lat,stop.lng],
+    //zoom: 12,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]}
 );
 
 console.log(ROUTE);
-for(let entry of Route) {
+for(let entry of ROUTE) {
     console.log(entry);
     let mrk = L.marker([ stop.lat, stop.lng ]).addTo(map);
     mrk.bindPopup(`<h4>Stop ${stop.nr}: ${stop.name}<h4>
     <p><a href="${stop.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
-    `).openPopup();
+    `);
+    if (entry.nr==17)/{
+        map.setView([entry.lat, entry.lng], 13);
+        mrk.openPopup();
 }
 
 
