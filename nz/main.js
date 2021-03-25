@@ -24,10 +24,10 @@ for(let entry of ROUTE) {
     mrk.bindPopup(`<h4>Stop ${stop.nr}: ${stop.name}<h4>
     <p><a href="${stop.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
     `);
-    if (entry.nr==17)/{
+    if (entry.nr==17) {
         map.setView([entry.lat, entry.lng], 13);
         mrk.openPopup();
 }
 
 
-//console.log(document.querySelector("#map"))
+//console.log(document.querySelector("#map")
