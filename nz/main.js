@@ -6,7 +6,7 @@ let stop = {
     lat: -41.8245,
     lng:  172.8381,
     user: "AnnaKeuschnigg",
-    wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)",
+    wikipedia: "https://en.wikipedia.org/wiki/Lake_Rotoiti_(Tasman)"
 };
 
 
