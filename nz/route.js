@@ -134,6 +134,7 @@ const ROUTE = [
         wikipedia: "https://en.wikipedia.org/wiki/Wanaka"
     }, {
         nr: 5,
+        name: "marlenexx",
         lat: -45.09746,
         lng: 170.96911,
         user: "marlene353",
@@ -159,13 +160,6 @@ const ROUTE = [
         lng: 176.251389,
         user: "jo3093",
         wikipedia: "https://en.wikipedia.org/wiki/Champagne_Pool"
-    }, {
-        nr: 19,
-        name: "Picton",
-        lat: -41.293056,
-        lng: 174.001944,
-        user: "maximilianender",
-        Wikipedia: "https://en.wikipedia.org/wiki/Picton,_New_Zealand",
     }, {
         nr: 18,
         name: "Abel Tasman National Park",
