@@ -1,11 +1,13 @@
 body {
     max-width: 1280px;
     margin: auto;
-    font-family:"open sans" "sans-serif";
+    font-family: "open sans""sans-serif";
 }
+
 header {
     text-align: center;
 }
+
 header p {
     text-align: right;
     font-weight: bold;
@@ -13,43 +15,53 @@ header p {
     padding-right: 1em;
     margin-top: -2em;
 }
+
 .white,
 .white a:link,
-.white a:visited{
+.white a:visited {
     color: white;
 }
+
 header nav img {
-    border-radius: 50%; 
+    border-radius: 50%;
 }
+
 a:link,
-a:visited{
-    color:black
+a:visited {
+    color: black
 }
-header address{
+
+header address {
     font-size: 0.9em;
     font-style: italic;
 }
+
 main {
     max-width: 70%;
     margin: auto;
 }
-main p{
-    text-align:justify;
+
+main p {
+    text-align: justify;
 }
+
 main figure {
     margin-left: 0;
     width: 100%;
 }
+
 main figure img {
     border-style: solid;
     border-color: black;
     border-width: 5px;
 }
+
 #map {
     height: 360px;
     width: 100%;
-    border: 1px solid gray; 
+    border: 1px solid gray;
 }
+
 main ul {
     list-style-type: circle;
 }
@@ -57,21 +69,23 @@ main ul {
 footer .next {
     float: right;
 }
+
 footer {
     padding: 1em 0 3em 0;
 }
 
 .mr3 {
-    margin:0.3em;
+    margin: 0.3em;
 }
-@media screen and (max-width: 900px){
+
+@media screen and (max-width: 900px) {
     main {
-        max-width:90%; 
+        max-width: 90%;
     }
 }
-@media screen and (max-width: 1280px){
+
+@media screen and (max-width: 1280px) {
     header img.banner {
         width: 100vw;
     }
 }
- 
