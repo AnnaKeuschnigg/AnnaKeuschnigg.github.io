@@ -38,6 +38,10 @@ marker.bindPopup(`<h3>${station.propertier.names}</h3>
 <ul>
     <li>Datum: ${formattedDate.toLocaleString("de")}</li>
     <li>Temperatur: ${station.properties.LT}</li>
+    <li>relative Luftfeuchtigkeit: ${station.properties.RH}</li>
+    <li>Schneehöhe: ${station.properties.HS}
+    </li>
+    <li>Seehöhe: ${station.properties.geometry.coordinates[2]} m.ü.A.</li>
 </ul>
 `)
 marker.addTo(awsLayer);
