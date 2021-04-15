@@ -62,6 +62,8 @@ if(station.properties.HS)
     let snowIcon=L.divIcon({
         html: <div class="snow-label">${station.properties.HS}</div>
     });
+
+    }
     let snowMarker=L.marker([
         station.geometry.coordinates[1],
         station.geometry.coordinates[0]
@@ -70,7 +72,14 @@ if(station.properties.HS)
     });
     snowMarker.addTo(snowlayer);
 
-}
+};
+if(station.properties.WG)
+    let highlightClass='';
+    if(station.properties.WG>3){
+        highlightClass='WG>3'
+    }
+    if(station.properties.WG>5){
+        highlightClass='WG>5'
 // set map view to all stations
 map.fitBounds(awsLayer.getBounds());
 });
