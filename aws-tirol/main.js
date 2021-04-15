@@ -29,6 +29,7 @@ for(station of json.features) {
     let marker= L.marker([station.geometry.coordinates[1],
     station.geometry.coordinates[0]
 ]);
+marker.bindPopup(`<h3>${station.propertier.names}</h3>`)
 marker.addTo(map);
 }
 })
