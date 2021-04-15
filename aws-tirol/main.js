@@ -18,3 +18,7 @@ let layerControl= L.control.layers({
         L.tileLayer.provider('BasemapAT.overlay')
     ])
 }).addTo(map);
+
+let awsUrl= 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
+
+fetch(awsUrl)
