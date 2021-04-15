@@ -36,4 +36,6 @@ for(station of json.features) {
 marker.bindPopup(`<h3>${station.propertier.names}</h3>`)
 marker.addTo(awsLayer);
 }
+// set map view to all stations
+map.fitBounds(awsLayer.getBounds());
 });
