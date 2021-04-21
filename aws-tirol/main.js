@@ -1,4 +1,4 @@
-let basemapGray= L.tileLayer.provider('BasemapAT.grau')
+let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 
 let map= L.map("map", {
     center:[47,11],
@@ -6,47 +6,50 @@ let map= L.map("map", {
     layers:[
         basemapGray
     ]
-})
+});
 
-let layerControl= L.control.layers({
+
+//https://leafletjs.com/reference-1.7.1.html#layer
+let layerControl = L.control.layers({
     "BasemapAT.grau": basemapGray,
-    "BasemapAT.orthofoto":L.tilelayer.provider('BasemapAT.orthofoto'),
-    "OpenRailwayMap":L.tilelayer.provider('OpenRailwayMap'),
-    "BasemapAT.overlay":L.tileLayer.provider('BasemapAT.overlay'),
+    "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
+    "BasemapAT.surface": L.tileLayer.provider('BasemapAT.surface'),
+    "BAsemapAT.overlay": L.tileLayer.provider('BasemapAT.overlay'),
     "BasemapAT.overlay+ortho": L.layerGroup([
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
     ])
 }).addTo(map);
 
-let awsUrl= 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
+let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson";
 
-let awsLayer= L.featureGroup();
-layerControl.addOverlay(awsLayer, "Wetterstationen in Tirol");
+let awsLayer = L.featureGroup();
+layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
 awsLayer.addTo(map);
-let snowLayer= L.featureGroupe();
+let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhe");
-snowLayer.addTo(map);
 
 fetch(awsUrl).then(response => response.json())
-.then(json=> {
-console.log('Daten konvertiert: ', json);
-for(station of json.features) {
-    console.log('Station:',station);
-    let marker= L.marker([station.geometry.coordinates[1],
-    station.geometry.coordinates[0]
-]);
-let formattedDate= new Date(station.properties.date)
-marker.bindPopup(`<h3>${station.propertier.names}</h3>
+    .then(json => {
+        console.log("Daten konvertiert: ", json);
+        for (station of json.features) {
+            console.log("Station: ", station);
+            let marker = L.marker([
+                station.geometry.coordinates[1],
+                station.geometry.coordinates[0]
+            ]);
+            let formattedDate = new Date(station.properties.date);
+            marker.bindPopup(`
+    <h3>${station.properties.name}</h3>
 <ul>
-    <li>Datum: ${formattedDate.toLocaleString("de")}</li>
-    <li>Temperatur: ${station.properties.LT}°C</li>
-    <li>relative Luftfeuchtigkeit: ${station.properties.RH}</li>
-    <li>Schneehöhe: ${station.properties.HS}
+    <li>Datum: ${formattedDate.toLocaleString("de")} Uhr</li>
+    <li>Temperatur: ${station.properties.LT} °C</li>
+    <li>relative Luftfeuchtigkeit: ${station.properties.RH} %</li>
+    <li>Schneehöhe: ${station.properties.HS} cm
     </li>
-    <li>Windgeschwindigkeit: ${station.properties.WG||'?'}km/h</li>
-    <li>Windrichtung: ${station.properties.WR||'?'}</li>
-    <li>Seehöhe: ${station.properties.geometry.coordinates[2]||'?'} m.ü.A.</li>
+    <li>Windgeschwindigkeit: ${station.properties.WG||'?'} km/h</li>
+    <li>Windrichtung: ${station.properties.WR||'?'} °</li>
+    <li>Seehöhe: ${station.properties.geometry.coordinates.RH||'?'} m.ü.A.</li>
 </ul>
 <a target="_blank" href="httos://wiski.tirol.gv.at/lawienen/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
 `);
