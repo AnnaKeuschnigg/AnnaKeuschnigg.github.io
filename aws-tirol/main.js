@@ -51,19 +51,19 @@ fetch(awsUrl).then(response => response.json())
     <li>Windrichtung: ${station.properties.WR||'?'} °</li>
     <li>Seehöhe: ${station.properties.geometry.coordinates.RH||'?'} m.ü.A.</li>
 </ul>
-<a target="_blank" href="httos://wiski.tirol.gv.at/lawienen/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
+<a target="_blank" href="https://wiski.tirol.gv.at/lawienen/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
 `);
 marker.addTo(awsLayer);
 if(station.properties.HS)
     let highlightClass='';
     if(station.properties.HS>100){
-        highlightClass='snow - 100';
+        highlightClass='snow-100';
     }
     if(station.properties.HS>200){
-        highlightClass='snow - 200';
+        highlightClass='snow-200';
     }
     let snowIcon=L.divIcon({
-        html: <div class="snow-label">${station.properties.HS}</div>
+        html: `<div class="snow-label">${station.properties.HS}</div>`
     });
 
     }
@@ -73,16 +73,20 @@ if(station.properties.HS)
     ], {
         icon: snowIcon
     });
-    snowMarker.addTo(snowlayer);
+    snowMarker.addTo(snowLayer);
 
 };
-if(station.properties.WG)
-    let highlightClass='';
-    if(station.properties.WG>3){
-        highlightClass='WG>3'
+if(station.properties.WG){
+    let windHighlightClass = '';
+    if(station.properties.WG > 10) {
+        windHighlightClass = 'wind-10';
     }
-    if(station.properties.WG>5){
-        highlightClass='WG>5'
+    if(station.properties.WG > 20) {
+        windHighlightClass = 'wind-20';
+    }
+    let windIcon = L.divIcon({
+        html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
+        
 // set map view to all stations
 map.fitBounds(awsLayer.getBounds());
 });
