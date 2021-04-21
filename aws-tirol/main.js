@@ -18,8 +18,12 @@ let layerControl = L.control.layers({
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 let awsLayer = L.featureGroup();
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
+awsLayer.addTo(map);
 let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen");
+let windLayer = L.featureGroup();
+layerControl.addOverlay(windLayer, "Windgeschwindigkeit (km/h)");
+
 snowLayer.addTo(map);
 fetch(awsUrl)
     .then(response => response.json())
