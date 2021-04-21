@@ -82,12 +82,12 @@ fetch(awsUrl).then(response => response.json())
 
             }
             //Windgeschwindigkeit
-            if(station.properties.WG){
+            if (station.properties.WG) {
                 let windHighlightClass = '';
-                if(station.properties.WG > 10) {
+                if (station.properties.WG > 10) {
                     windHighlightClass = 'wind-10';
                 }
-                if(station.properties.WG > 20) {
+                if (station.properties.WG > 20) {
                     windHighlightClass = 'wind-20';
                 }
                 let windIcon = L.divIcon({
@@ -101,12 +101,12 @@ fetch(awsUrl).then(response => response.json())
                 });
                 windMarker.addTo(windLayer);
             }
-            if(station.properties.LT){
+            if (station.properties.LT) {
                 let tempHighlightClass = '';
-                if(station.properties.LT > 0){
+                if (station.properties.LT > 0) {
                     tempHighlightClass = 'tempgr0';
                 }
-                if(station.properties.LT < 0){
+                if (station.properties.LT < 0) {
                     tempHighlightClass = 'tempkl0';
                 }
                 let tempIcon = L.divIcon({
