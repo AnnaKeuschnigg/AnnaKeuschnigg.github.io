@@ -75,7 +75,6 @@ if(station.properties.HS)
     });
     snowMarker.addTo(snowLayer);
 
-};
 if(station.properties.WG){
     let windHighlightClass = '';
     if(station.properties.WG > 10) {
@@ -85,8 +84,7 @@ if(station.properties.WG){
         windHighlightClass = 'wind-20';
     }
     let windIcon = L.divIcon({
-        html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
-        
+        html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`});
+
 // set map view to all stations
 map.fitBounds(awsLayer.getBounds());
-});
