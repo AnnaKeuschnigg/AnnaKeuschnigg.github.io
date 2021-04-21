@@ -76,6 +76,24 @@ fetch(awsUrl)
                 });
                 snowMarker.addTo(snowLayer);
             }
+            if (station.properties.WG) {
+                let windHighlightClass = '';
+                if (station.properties.WG > 10) {
+                    windHighlightClass = 'wind-10';
+                }
+                if (station.properties.WG > 20) {
+                    windHighlightClass = 'wind-20';
+                }
+                let windIcon = L.divIcon({
+                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`,
+                });
+                let windMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: windIcon
+                });
+                windMarker.addTo(windLayer);
         }
         
         map.fitBounds(awsLayer.getBounds());
