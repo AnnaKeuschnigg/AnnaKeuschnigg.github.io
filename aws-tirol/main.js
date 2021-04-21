@@ -23,8 +23,13 @@ let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen");
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeit (km/h)");
+let TempLayer = L.featureGroup();
+layerControl.addOverlay(TempLayer, "Lufttemperatur (°C)");
 
 snowLayer.addTo(map);
+let windLayer = L.featureGroup();
+layerControl.addOverlay(windLayer, "Windgeschwindigkeit (km/h)");
+windLayer.addTo(map);
 fetch(awsUrl)
     .then(response => response.json())
     .then(json => {
