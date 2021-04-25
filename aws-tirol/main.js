@@ -44,10 +44,10 @@ L.control.scale({
 }).addTo(map);
 
 let newLabel = (coords, options) => {
-    console.log("Koordinaten coords: ", coords);
-    console.log("Optionsobjekt:", options);
-    let marker = L.marker([coords[1], coords[0]]);
-    console.log("Marker:", marker);
+    let marker = newLabel(station.geometry.coordinates, {
+        value: station.properties.LT
+    });
+    marker.addTo(overlays.temperature);
     return marker;
 };
 
