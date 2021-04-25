@@ -80,44 +80,19 @@ fetch(awsUrl).then(response => response.json())
             marker.addTo(overlays.stations);
             //Schnee
             if (typeof station.properties.HS == "number") {
-                let highlightClass = '';
-                if (station.properties.HS > 100) {
-                    highlightClass = 'snow-100';
-                }
-                if (station.properties.HS > 200) {
-                    highlightClass = 'snow-200';
-                }
-                let snowIcon = L.divIcon({
-                    html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
-                })
-                let snowMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: snowIcon
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.HS
+            
                 });
-                snowMarker.addTo(overlays.snowLayer);
+                marker.addTo(overlays.snowheight);
 
             }
             //Windgeschwindigkeit
             if (typeof station.properties.WG == "number") {
-                let windHighlightClass = '';
-                if (station.properties.WG > 10) {
-                    windHighlightClass = 'wind-10';
-                }
-                if (station.properties.WG > 20) {
-                    windHighlightClass = 'wind-20';
-                }
-                let windIcon = L.divIcon({
-                    html: `<div class="wind-label ${windHighlightClass}">${station.properties.WG}</div>`
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.WG
                 });
-                let windMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: windIcon
-                });
-                windMarker.addTo(overlays.windspeed);
+                marker.addTo(overlays.windspeed);
             }
             if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
