@@ -39,6 +39,10 @@ let layerControl = L.control.layers({
 }).addTo(map);
 overlays.temperature.addTo(map);
 
+L.control.scale({
+    imperial: false
+}).addTo(map);
+
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson";
 
 
@@ -67,7 +71,7 @@ fetch(awsUrl).then(response => response.json())
     `);
             marker.addTo(overlays.stations);
             //Schnee
-            if (station.properties.HS) {
+            if (typeof station.properties.HS == "number") {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
                     highlightClass = 'snow-100';
@@ -88,7 +92,7 @@ fetch(awsUrl).then(response => response.json())
 
             }
             //Windgeschwindigkeit
-            if (station.properties.WG) {
+            if (typeof station.properties.WG == "number") {
                 let windHighlightClass = '';
                 if (station.properties.WG > 10) {
                     windHighlightClass = 'wind-10';
@@ -107,24 +111,8 @@ fetch(awsUrl).then(response => response.json())
                 });
                 windMarker.addTo(overlays.windspeed);
             }
-            if (station.properties.LT) {
-                let tempHighlightClass = '';
-                if (station.properties.LT > 0) {
-                    tempHighlightClass = 'tempgr0';
-                }
-                if (station.properties.LT < 0) {
-                    tempHighlightClass = 'tempkl0';
-                }
-                let tempIcon = L.divIcon({
-                    html: `<div class="temp-label ${tempHighlightClass}">${station.properties.LT}</div>`
-                });
-                let tempMarker = L.marker([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0],
-                ], {
-                    icon: tempIcon
-                });
-                tempMarker.addTo(TempLayer);
+            if (typeof station.properties.LT == "number") {
+                console.log(station.properties.LT)
             }
         }
 
