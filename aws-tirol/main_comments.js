@@ -79,8 +79,8 @@ fetch(awsUrl).then(response => response.json())
                 if (station.properties.HS > 200) {
                     highlightClass = 'snow-200';
                 }
-             // https://leafletjs.com/reference-1.7.1.html#divicon
-            // https://leafletjs.com/reference-1.7.1.html#marker-icon
+                // https://leafletjs.com/reference-1.7.1.html#divicon
+                // https://leafletjs.com/reference-1.7.1.html#marker-icon
                 let snowIcon = L.divIcon({
                     html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
                 })
