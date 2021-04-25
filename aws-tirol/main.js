@@ -46,7 +46,7 @@ L.control.scale({
 let getColor = (value, colorRamp) => {
     //console.log("Wert:", value, "Palette:", colorRamp);
     for (let rule of colorRamp) {
-        if (value >= rule.min && val < rule.max) {
+        if (value >= rule.min && value < rule.max) {
             return rule.col;
         }
     }
@@ -54,26 +54,31 @@ let getColor = (value, colorRamp) => {
 };
 
 let newLabel = (coords, options) => {
-    let color = getColor(options.value, options.colors)
-    let marker = newLabel(station.geometry.coordinates, {
-        value: station.properties.LT
+    let color = getColor(options.value, options.colors);
+    //console.log("Wert", options.value, "bekommt Farbe", color);
+    let label = L.divIcon({
+        html: `<div style="background-color:${color}">${options.value}</div>`,
+        className: "text-label"
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label
     });
-    marker.addTo(overlays.temperature);
     return marker;
 };
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson";
 
 
-fetch(awsUrl).then(response => response.json())
-    .then(json => {
-        console.log("Daten konvertiert: ", json);
-        for (station of json.features) {
-            console.log("Station: ", station);
-            let marker = L.marker([
-                station.geometry.coordinates[1],
-                station.geometry.coordinates[0]
-            ]);
+fetch(awsUrl)
+.then(response => response.json())
+.then(json => {
+    console.log('Daten konvertiert: ', json);
+    for (station of json.features) {
+        // console.log('Station: ', station);
+        let marker = L.marker([
+            station.geometry.coordinates[1],
+            station.geometry.coordinates[0]
+        ]);
             let formattedDate = new Date(station.properties.date);
             marker.bindPopup(`
     <h3>${station.properties.name}</h3>
@@ -92,7 +97,7 @@ fetch(awsUrl).then(response => response.json())
             //Schnee
             if (typeof station.properties.HS == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.HS,
+                    value: station.properties.HS.toFixed(0),
                     colors: COLORS.snowheight
                 });
                 marker.addTo(overlays.snowheight);
@@ -101,18 +106,10 @@ fetch(awsUrl).then(response => response.json())
             //Windgeschwindigkeit
             if (typeof station.properties.WG == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.WG,
+                    value: station.properties.WG.toFixed(0),
                     colors: COLORS.windspeed
                 });
-
                 marker.addTo(overlays.windspeed);
-            }
-            if (typeof station.properties.LT == "number") {
-                let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.LT,
-                    colors: COLORS.temperature
-                });
-                marker.addTo(overlays.temperature);
             }
         }
 
