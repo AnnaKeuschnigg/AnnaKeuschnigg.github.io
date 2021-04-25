@@ -10,6 +10,13 @@ let map = L.map("map", {
         basemapGray
     ]
 });
+let overlays = {
+    stations: L.featureGroup(),
+    temperature: L.featureGroup(),
+    snowheight: L.featureGroup(),
+    windspeed: L.featureGroup(),
+    winddirection: L.featureGroup()
+};
 
 //https://leafletjs.com/reference-1.7.1.html#layer
 let layerControl = L.control.layers({
@@ -21,20 +28,17 @@ let layerControl = L.control.layers({
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
     ])
+}, {
+    "Wetterstationen Tirol": overlays.stations,
+    "Temperatur (°C)": overlays.temperature,
+    "Schneehöhe (cm)": overlays.snowheight,
+    "Windgeschwindigkeit (km/h)": overlays.windspeed,
+    "Windrichtung": overlays.winddirection
 }).addTo(map);
+overlays.temperature.addTo(map);
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson";
 
-//https://leafletjs.com/reference-1.7.1.html#featuregroup
-let awsLayer = L.featureGroup();
-layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
-awsLayer.addTo(map);
-let snowLayer = L.featureGroup();
-layerControl.addOverlay(snowLayer, "Schneehöhen");
-let windLayer = L.featureGroup();
-layerControl.addOverlay(windLayer, "Windgeschwindigkeit (km/h)");
-let TempLayer = L.featureGroup();
-layerControl.addOverlay(TempLayer, "Lufttemperatur (°C)");
 
 fetch(awsUrl).then(response => response.json())
     .then(json => {
@@ -59,7 +63,7 @@ fetch(awsUrl).then(response => response.json())
     </ul>
     <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
     `);
-            marker.addTo(awsLayer);
+            marker.addTo(overlays.stations);
             //Schnee
             if (station.properties.HS) {
                 let highlightClass = '';
@@ -78,7 +82,7 @@ fetch(awsUrl).then(response => response.json())
                 ], {
                     icon: snowIcon
                 });
-                snowMarker.addTo(snowLayer);
+                snowMarker.addTo(overlays.snowLayer);
 
             }
             //Windgeschwindigkeit
@@ -99,7 +103,7 @@ fetch(awsUrl).then(response => response.json())
                 ], {
                     icon: windIcon
                 });
-                windMarker.addTo(windLayer);
+                windMarker.addTo(overlays.windspeed);
             }
             if (station.properties.LT) {
                 let tempHighlightClass = '';
@@ -122,5 +126,5 @@ fetch(awsUrl).then(response => response.json())
             }
         }
 
-        map.fitBounds(awsLayer.getBounds());
+        map.fitBounds(overlays.stations.getBounds());
     });
