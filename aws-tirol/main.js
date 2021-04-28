@@ -45,6 +45,17 @@ L.control.scale({
     imperial: false
 }).addTo(map);
 
+L.control.rainviewer({
+    position: 'bottomright',
+    nextButtonText: '>',
+    playStopButtonText: 'Play/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Hour:",
+    opacitySliderLabelText: "Opacity:",
+    animationInterval: 500,
+    opacity: 0.5
+}).addTo(map);
+
 let getColor = (value, colorRamp) => {
     //console.log("Wert:", value, "Palette:", colorRamp);
     for (let rule of colorRamp) {
@@ -53,6 +64,13 @@ let getColor = (value, colorRamp) => {
         }
     }
     return "black";
+};
+let getDirection = (val, windRamp) => {
+    for (let rule of windRamp) {
+        if ((val >= rule.min) && (val < rule.max)) {
+            return rule.dir;
+        }
+    }
 };
 
 let newLabel = (coords, options) => {
@@ -68,20 +86,32 @@ let newLabel = (coords, options) => {
     });
     return marker;
 };
+let WindLabel = (coords, options) => {
+    let Direction = getDirection(options.value, options.directions);
+    let label = L.divIcon({
+        html: `<div>${Direction}</div>`,
+        className: "text-label"
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label,
+        title: `${options.station} (${coords[2]} m.ü.A)`
+    });
+    return marker;
+}
 
 let awsUrl = "https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson";
 
 
 fetch(awsUrl)
-.then(response => response.json())
-.then(json => {
-    console.log('Daten konvertiert: ', json);
-    for (station of json.features) {
-        // console.log('Station: ', station);
-        let marker = L.marker([
-            station.geometry.coordinates[1],
-            station.geometry.coordinates[0]
-        ]);
+    .then(response => response.json())
+    .then(json => {
+        console.log('Daten konvertiert: ', json);
+        for (station of json.features) {
+            // console.log('Station: ', station);
+            let marker = L.marker([
+                station.geometry.coordinates[1],
+                station.geometry.coordinates[0]
+            ]);
             let formattedDate = new Date(station.properties.date);
             marker.bindPopup(`
     <h3>${station.properties.name}</h3>
@@ -122,18 +152,29 @@ fetch(awsUrl)
                     colors: COLORS.temperature,
                     station: station.properties.name
                 });
-                
+
                 marker.addTo(overlays.temperature);
             }
 
-             //Relative Luftfeuchtigkeit
-             if(typeof station.properties.RH == 'number') {
+            //Relative Luftfeuchtigkeit
+            if (typeof station.properties.RH == 'number') {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.RH.toFixed(1),
-                    colors: COLORS.rHum, 
+                    colors: COLORS.rHum,
                     station: station.properties.name
                 });
                 marker.addTo(overlays.relHum);
+            }
+
+            //Windrichtung 
+            if (typeof station.properties.WR == 'number') {
+                let marker = WindLabel(station.geometry.coordinates, {
+                    value: station.properties.WR,
+                    directions: DIRECTIONS,
+                    colors: DIRECTIONS.col,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.winddirection);
             }
         }
 
