@@ -54,7 +54,7 @@ fetch("data/TOURISTIKHTSVSLOGD.json")
 .then(stations =>{
     L.geoJson(stations, {
         onEachFeature: (feature, layer) => {
-            layer.bindPopup(feature.properties)
+            layer.bindPopup(feature.properties.STAT_NAME)
         } 
     }).addTo(map);
 })
