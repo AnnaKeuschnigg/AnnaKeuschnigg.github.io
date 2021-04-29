@@ -163,7 +163,7 @@ fetch(awsUrl)
                     colors: COLORS.rHum,
                     station: station.properties.name
                 });
-                marker.addTo(overlays.relHum);
+                marker.addTo(overlays.rHum);
             }
 
             //Windrichtung 
