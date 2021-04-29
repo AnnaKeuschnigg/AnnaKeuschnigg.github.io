@@ -75,7 +75,7 @@ let drawBusLines = (geojsonData) => {
     L.geoJson(geojsonData, {
         style: (feature) => {
             let col = "red";
-            col= COLORS.buslines[feature.properties.LINE_NAME];
+            col = COLORS.buslines[feature.properties.LINE_NAME];
             return {
                 color: col
             }
