@@ -61,7 +61,7 @@ let drawBusStop = (geojsonData) => {
                 })
             })
         },
-        
+
         attribution: '<a href= "https://data.wien.gv.at">Stadt Wien </a> <a href= "https://mapicons.mapsmarker.com">Maps Icons Collections</a>'
     }).addTo(overlays.busStops);
 }
