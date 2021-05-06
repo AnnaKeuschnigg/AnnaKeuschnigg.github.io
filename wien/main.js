@@ -9,8 +9,8 @@ let baselayers = {
     highdpi: L.tileLayer.provider("BasemapAT.highdpi"),
     ortho_overlay: L.layerGroup([
         L.tileLayer.provider("BasemapAT.orthofoto"),
-        L.tileLayer.provider("BasemapAT.overlay")],
-    ),
+        L.tileLayer.provider("BasemapAT.overlay")
+    ], ),
 };
 
 // Overlays für die Themen zum Ein- und Ausschalten definieren
@@ -107,9 +107,9 @@ let drawPedAreas = (geojsonData) => {
             ${feature.properties.ZEITRAUM|| ""} <br>
             ${feature.properties.AUSN_TEXT || ""}
             `);
-           attribution: '<a href="https://data.wien.gv.at">Stadt Wien</a>'  
+            attribution: '<a href="https://data.wien.gv.at">Stadt Wien</a>'
         }
-       
+
     }).addTo(overlays.pedAreas);
 }
 
@@ -154,7 +154,32 @@ let hash = new L.Hash(map);
 
 
 var miniMap = new L.Control.MiniMap(
-    L.tileLayer.provider("BasemapAT.basemap"),{
-    toggleDisplay: true,
-    minimized: true
-}).addTo(map);
+    L.tileLayer.provider("BasemapAT.basemap"), {
+        toggleDisplay: true,
+        minimized: true
+    }).addTo(map);
+
+    L.control.reachability({
+        // add settings/options here
+        apiKey: '5b3ce3597851110001cf62485ca3477b2b62439e802bd0a41569ddc6',
+        drawButtonContent: '',
+    drawButtonStyleClass: 'fa fa-pencil',
+    deleteButtonContent: '',
+    deleteButtonStyleClass: 'fa fa-trash',
+    distanceButtonContent: '',
+    distanceButtonStyleClass: 'fa fa-road',
+    timeButtonContent: '',
+    timeButtonStyleClass: 'fa fa-clock-o',
+    travelModeButton1Content: '',
+    travelModeButton1StyleClass: 'fa fa-car',
+    travelModeButton2Content: '',
+    travelModeButton2StyleClass: 'fa fa-bicycle',
+    travelModeButton3Content: '',
+    travelModeButton3StyleClass: 'fa fa-male',
+    travelModeButton4Content: '',
+    travelModeButton4StyleClass: 'fa fa-wheelchair-alt'
+    }).addTo(map);
+
+    
+
+// token 5b3ce3597851110001cf62485ca3477b2b62439e802bd0a41569ddc6 
