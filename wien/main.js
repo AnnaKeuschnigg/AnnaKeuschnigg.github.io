@@ -159,16 +159,29 @@ var miniMap = new L.Control.MiniMap(
         minimized: true
     }).addTo(map);
 
-    let styleIntervals = (feature)=> {
-        console.log(feature);
+let styleIntervals = (feature) => {
+    //console.log(feature.properties); console.log(feature.properties.Measure)
+    let color = '';
+    let range = feature.properties.Range;
+    if (feature.properties.Measure === "time") {
+        console.log(color = COLORS.minutes[range])
+    } else if (color = feature.properties.Measure === "distance") {
+        console.log(COLORS.kilometers[range])
+    } else {
+        color = "black";
     }
-
-    L.control.reachability({
-        // add settings/options here
-        apiKey: '5b3ce3597851110001cf62485ca3477b2b62439e802bd0a41569ddc6',
-        styleFn:styleIntervals,
-        drawButtonContent: '',
-    drawButtonStyleClass: 'fa fa-pencil-alt fa-2x' ,
+    return {
+        color: color,
+        opacity: 0.5,
+        fillOpacity: 0.2
+    };
+};
+L.control.reachability({
+    // add settings/options here
+    apiKey: '5b3ce3597851110001cf62485ca3477b2b62439e802bd0a41569ddc6',
+    styleFn: styleIntervals,
+    drawButtonContent: '',
+    drawButtonStyleClass: 'fa fa-pencil-alt fa-2x',
     deleteButtonContent: '',
     deleteButtonStyleClass: 'fa fa-trash fa-2x',
     distanceButtonContent: '',
@@ -183,8 +196,4 @@ var miniMap = new L.Control.MiniMap(
     travelModeButton3StyleClass: 'fa fa-male fa-2x',
     travelModeButton4Content: '',
     travelModeButton4StyleClass: 'fa fa-wheelchair fa-2x'
-    }).addTo(map);
-
-    
-
-// token 5b3ce3597851110001cf62485ca3477b2b62439e802bd0a41569ddc6 
+}).addTo(map);
