@@ -106,8 +106,9 @@ let drawPedAreas = (geojsonData) => {
             ${feature.properties.ZEITRAUM|| ""} <br>
             ${feature.properties.AUSN_TEXT || ""}
             `);
-            attribution: '<a href="https://data.wien.gv.at">Stadt Wien</a>'
+           attribution: '<a href="https://data.wien.gv.at">Stadt Wien</a>'  
         }
+       
     }).addTo(overlays.pedAreas);
 }
 
