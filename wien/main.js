@@ -89,7 +89,7 @@ let drawBusLines = (geojsonData) => {
     }).addTo(overlays.busLines);
 }
 
-let drawPedestrianAreas = (geojsonData) => {
+let drawPedAreas = (geojsonData) => {
     console.log('Zone: ', geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => {
@@ -130,7 +130,7 @@ let drawSights = (geojsonData) => {
 }
 
 for (let config of OGDWIEN) {
-    // console.log("Config: ", config.data);
+    console.log("Config: ", config.data);
     fetch(config.data)
         .then(response => response.json())
         .then(geojsonData => {
