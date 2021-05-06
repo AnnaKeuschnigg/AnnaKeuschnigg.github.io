@@ -142,9 +142,11 @@ for (let config of OGDWIEN) {
             } else if (config.title == "Liniennetz Vienna Sightseeing") {
                 drawBusLines(geojsonData);
             } else if (config.title == "Fußgängerzonen") {
-                drawPedestrianAreas(geojsonData);
+                drawPedAreas(geojsonData);
             } else if (config.titel == "Sehenswürdigkeiten") {
                 drawSights(geojonsonData);
             }
         })
 }
+
+let hash = new L.Hash(map);
