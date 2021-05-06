@@ -9,8 +9,8 @@ let baselayers = {
     highdpi: L.tileLayer.provider("BasemapAT.highdpi"),
     ortho_overlay: L.layerGroup([
         L.tileLayer.provider("BasemapAT.orthofoto"),
-        L.tileLayer.provider("BasemapAT.overlay")
-    ]),
+        L.tileLayer.provider("BasemapAT.overlay")],
+    ),
 };
 
 // Overlays für die Themen zum Ein- und Ausschalten definieren
@@ -18,8 +18,7 @@ let overlays = {
     busLines: L.featureGroup(),
     busStops: L.markerClusterGroup(),
     pedAreas: L.featureGroup(),
-    sights: L.markerClusterGroup(),
-    
+    sights: L.markerClusterGroup()
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -153,3 +152,9 @@ for (let config of OGDWIEN) {
 
 let hash = new L.Hash(map);
 
+
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"),{
+    toggleDisplay: true,
+    minimized: true
+}).addTo(map);
