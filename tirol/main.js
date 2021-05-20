@@ -82,3 +82,5 @@ elevationControl.load(`tracks/${nr}.gpx`)
 
 const selectedTrack = 18;  
 drawTrack(selectedTrack);
+
+console.log()
