@@ -44,7 +44,9 @@ let layerControl = L.control.layers({
 overlays.tracks.addTo(map);
 
 var elevationConrol = L.control.elevation({elevationdiv: "#profile",
-}),
+followMarker: false,
+theme: 'lime-theme'
+}).addTo(map);
 
 const drawTrack = (nr) => {
     console.log('Track: ', nr);
@@ -75,7 +77,7 @@ const drawTrack = (nr) => {
         </ul>
         `)
     });
-
+elevationControl.load(`tracks/${nr}.gpx`)
 };
 
 const selectedTrack = 18;  
