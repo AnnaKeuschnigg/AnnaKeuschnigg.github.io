@@ -43,7 +43,7 @@ let layerControl = L.control.layers({
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 
-var elevationConrol = L.control.elevation({elevationdiv: "#profile",
+const elevationControl = L.control.elevation({elevationDiv: "#profile",
 followMarker: false,
 theme: 'lime-theme'
 }).addTo(map);
@@ -84,3 +84,18 @@ const selectedTrack = 18;
 drawTrack(selectedTrack);
 
 console.log('biketirol json: ', BIKETIROL);
+let pulldown= document.querySelector("#pulldown");
+console.log('Pulldown: ', pulldown);
+for(let track of Biketirol) {
+    if(selectedTrack == track.nr) {
+        selected = 'selected';
+    } else {
+        selected = '';
+    }
+    pulldown.innerHTML += `<option value= "${track.nr}">${track.nr}: ${track.etappe}</option>`
+}
+
+pulldown.onchange = () => {
+    console.log('changed!!!', pulldown.value);
+    drawTrack(pulldwon.value);
+};
