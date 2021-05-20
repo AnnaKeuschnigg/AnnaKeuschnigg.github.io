@@ -28,11 +28,11 @@ header a {
     border: 1px solid gray;
 }
 
-#profile{
+#profile {
     margin-top: 0.3em;
     border: 1px solid gray;
 }
 
-#map path.lime-theme.evelation-polyline{
-    stroke-opacity: 0; 
+#map path.lime-theme.evelation-polyline {
+    stroke-opacity: 0;
 }
