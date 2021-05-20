@@ -67,7 +67,7 @@ const drawTrack = (nr) => {
     }).addTo(overlays.tracks);
     gpxTrack.on("loaded", () => {
         console.log('loaded gpx');
-        map.fitBounds(gpsTrack.getBounds());
+        map.fitBounds(gpxTrack.getBounds());
         console.log('Track name: ', gpxTrack.get_distance());
         gpxTrack.bindPopup(`
         <h3>${gpxTrack.get_name()}</h3>
@@ -89,7 +89,7 @@ drawTrack(selectedTrack);
 //console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
 //console.log('Pulldown: ', pulldown);
-for (let track of Biketirol) {
+for (let track of BIKETIROL) {
     if (selectedTrack == track.nr) {
         selected = 'selected';
     } else {
@@ -100,5 +100,5 @@ for (let track of Biketirol) {
 
 pulldown.onchange = () => {
     //console.log('changed!!!', pulldown.value);
-    drawTrack(pulldwon.value);
+    drawTrack(pulldown.value);
 };
