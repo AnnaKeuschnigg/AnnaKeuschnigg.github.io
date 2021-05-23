@@ -181,3 +181,9 @@ fetch(awsUrl)
 
         map.fitBounds(overlays.stations.getBounds());
     });
+
+        // minimap
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.basemap"), {
+    toggleDisplay: true,
+    minimized: true
+}).addTo(map)
