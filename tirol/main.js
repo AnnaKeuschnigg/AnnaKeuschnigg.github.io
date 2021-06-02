@@ -159,7 +159,7 @@ const selectedTrack = 18;
 drawTrack(selectedTrack);
 
 const updateTexts = (nr) => {
-    console.log(nr);
+    //console.log(nr);
     for (let etappe of BIKETIROL) {
         //console.log(etappe);
         // ist es die aktuelle Etappe?
