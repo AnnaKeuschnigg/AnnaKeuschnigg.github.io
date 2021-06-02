@@ -51,6 +51,10 @@ const elevationControl = L.control.elevation({
     theme: 'lime-theme'
 }).addTo(map);
 
+const drawWikipedia = (bounds) => {
+    console.log(bpunds);
+};
+
 const drawTrack = (nr) => {
     //console.log('Track: ', nr);
     elevationControl.clear();
@@ -80,7 +84,8 @@ const drawTrack = (nr) => {
             <li>Höhenmeter bergauf: ${gpxTrack.get_elevation_gain()} m</li>
             <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
         </ul>
-        `)
+        `);
+        drawWikipedia(gpxTrack.getBounds());
     });
     elevationControl.load(`tracks/${nr}.gpx`)
 };
