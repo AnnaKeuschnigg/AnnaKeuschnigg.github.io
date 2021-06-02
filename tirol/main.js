@@ -55,8 +55,8 @@ const drawWikipedia = (bounds) => {
     console.log(bounds);
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=annak&lang=de&maxRows=30`;
     console.log(url);
-      // URL bei geonames.org aufrufen und JSO-Daten abholen
-      fetch(url).then(
+    // URL bei geonames.org aufrufen und JSO-Daten abholen
+    fetch(url).then(
         response => response.json()
     ).then(jsonData => {
         console.log(jsonData);
@@ -64,6 +64,19 @@ const drawWikipedia = (bounds) => {
         for (let article of jsonData.geonames) {
             let mrk = L.marker([article.lat, article.lng]);
             mrk.addTo(overlays.wikipedia);
+            // Popup erzeugen
+            let img = "";
+            if (article.thumbnailImg) {
+                img = `<img src="${article.thumbnailImg}" alt="thumbnail">`;
+            }
+            //popup definieren
+            mrk.bindPopup(`
+            <small>${article.feature}</small>
+            <h3>${article.title} (${article.elevation}m)</h3>
+            ${img}
+            <p>${article.summary}</p>
+            <a target="Wikipedia" href="https://${article.wikipediaUrl}">Wikipedia-Artikel</a>
+        `)
         }
     });
 };
