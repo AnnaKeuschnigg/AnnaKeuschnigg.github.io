@@ -43,6 +43,7 @@ let layerControl = L.control.layers({
 
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
+overlays.wikipedia.addTo(map);
 
 const elevationControl = L.control.elevation({
     elevationDiv: "#profile",
