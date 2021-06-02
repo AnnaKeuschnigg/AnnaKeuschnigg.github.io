@@ -53,9 +53,9 @@ const elevationControl = L.control.elevation({
 
 let articleDrawn = {};
 const drawWikipedia = (bounds) => {
-    console.log(bounds);
+    //console.log(bounds);
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=annak&lang=de&maxRows=30`;
-    console.log(url);
+    //console.log(url);
 
     let icons = {
         adm1st: "wikipedia_administration.png",
@@ -76,23 +76,23 @@ const drawWikipedia = (bounds) => {
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData);
+        //console.log(jsonData);
 
         for (let article of jsonData.geonames) {
             // habe ich den Artikel schon gezeichnet?
-                  if (articleDrawn[article.wikipediaUrl]) {
-                    // Ja, nicht noch einal zeichnen
-                    console.log("schon gesehen", article.wikipediaUrl);
-                    continue;
-                } else {
-                    articleDrawn[article.wikipediaUrl] = true;
-                }
-                // welches icon soll verwendet werden?
-            if (icons[article.feature]){
+            if (articleDrawn[article.wikipediaUrl]) {
+                // Ja, nicht noch einal zeichnen
+                //console.log("schon gesehen", article.wikipediaUrl);
+                continue;
+            } else {
+                articleDrawn[article.wikipediaUrl] = true;
+            }
+            // welches icon soll verwendet werden?
+            if (icons[article.feature]) {
                 // ein bekanntes
             } else {
                 // generisches InfoIcon
-                article.feature="default";
+                article.feature = "default";
             };
             let mrk = L.marker([article.lat, article.lng], {
                 icon: L.icon({
@@ -158,6 +158,10 @@ const drawTrack = (nr) => {
 const selectedTrack = 18;
 drawTrack(selectedTrack);
 
+const updateTexts = (nr) => {
+    console.log(nr);
+};
+
 //console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
 //console.log('Pulldown: ', pulldown);
@@ -169,10 +173,15 @@ for (let track of BIKETIROL) {
     }
     pulldown.innerHTML += `<option value= "${track.nr}">${track.nr}: ${track.etappe}</option>`
 }
+// Metadaten der Etappe updaten
+updateTexts(pulldown.value);
 
+//Eventhandler für Dropdown änderung
 pulldown.onchange = () => {
     //console.log('changed!!!', pulldown.value);
     drawTrack(pulldown.value);
+        // Metadaten der Etappe updaten
+        updateTexts(pulldown.value);
 };
 
 map.on("zoomend moveend", () => {
