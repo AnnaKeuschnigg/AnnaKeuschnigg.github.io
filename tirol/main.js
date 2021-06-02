@@ -59,7 +59,12 @@ const drawWikipedia = (bounds) => {
       fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData)
+        console.log(jsonData);
+
+        for (let article of jsonData.geonames) {
+            let mrk = L.marker([article.lat, article.lng]);
+            mrk.addTo(overlays.wikipedia);
+        }
     });
 };
 
