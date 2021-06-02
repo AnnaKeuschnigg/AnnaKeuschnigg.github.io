@@ -52,7 +52,7 @@ const elevationControl = L.control.elevation({
 }).addTo(map);
 
 const drawWikipedia = (bounds) => {
-    console.log(bpunds);
+    console.log(bounds);
 };
 
 const drawTrack = (nr) => {
