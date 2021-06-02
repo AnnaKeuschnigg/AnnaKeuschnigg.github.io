@@ -83,14 +83,14 @@ const drawWikipedia = (bounds) => {
                 // ein bekanntes
             } else {
                 // generisches InfoIcon
-                artivel.feature="default";
+                article.feature="default";
             };
             let mrk = L.marker([article.lat, article.lng], {
                 icon: L.icon({
                     iconUrl: `icons/${icons[article.feature]}`
                 })
             });
-            
+
             mrk.addTo(overlays.wikipedia);
             // Popup erzeugen
             let img = "";
