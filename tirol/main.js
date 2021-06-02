@@ -78,7 +78,19 @@ const drawWikipedia = (bounds) => {
         console.log(jsonData);
 
         for (let article of jsonData.geonames) {
-            let mrk = L.marker([article.lat, article.lng]);
+            
+            if (icons[article.feature]){
+                // ein bekanntes
+            } else {
+                // generisches InfoIcon
+                artivel.feature="default";
+            };
+            let mrk = L.marker([article.lat, article.lng], {
+                icon: L.icon({
+                    iconUrl: `icons/${icons[article.feature]}`
+                })
+            });
+            
             mrk.addTo(overlays.wikipedia);
             // Popup erzeugen
             let img = "";
